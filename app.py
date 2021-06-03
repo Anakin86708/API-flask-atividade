@@ -1,5 +1,7 @@
 from settings import Settings
-from flask import Flask, request, jsonify
+from flask import Flask, request
+import sys
+print('Running on Python', sys.version)
 
 app = Flask(__name__)
 app.run(host="0.0.0.0")
