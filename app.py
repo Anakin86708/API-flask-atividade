@@ -4,7 +4,6 @@ import sys
 print('Running on Python', sys.version)
 
 app = Flask(__name__)
-# app.run(host="0.0.0.0")
 
 index = 0
 
@@ -40,8 +39,12 @@ def set_data():
 
 @app.route('/data/<id>', methods = ['PUT'])
 def update_data(id):
-    data[int(id)] = Settings(request.get_json()['eventNotificationsState'], request.get_json()['onlyFavoriteState'], request.get_json()['updateFrequencyValue'])
-    print('Recived data:', data[int(id)])
+    print('Recived data:', request.get_json())
+    try:
+        data[int(id)] = Settings(request.get_json()['eventNotificationsState'], request.get_json()['onlyFavoriteState'], request.get_json()['updateFrequencyValue'])
+        print('Data:', data[int(id)])
+    except Exception as e:
+        return(e)
     return result('ok')
 
 @app.route('/data/<id>', methods = ['DELETE'])
